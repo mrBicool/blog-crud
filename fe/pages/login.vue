@@ -51,8 +51,15 @@ async function login() {
 <template>
   <div class="h-screen flex items-center justify-center">
     <div class="max-w-lg">
+      <div
+        class="flex justify-between font-semibold text-gray-600 py-2 mb-2 border-b"
+      >
+        <h1>Blog CRUD</h1>
+        <h1 class="font-normal">Login</h1>
+      </div>
       <UFormGroup label="Email" required>
         <UInput
+          @keyup.enter="login"
           v-model.trim="form.email"
           color="primary"
           variant="outline"
@@ -61,6 +68,7 @@ async function login() {
       </UFormGroup>
       <UFormGroup class="mt-2" label="Password" required>
         <UInput
+          @keyup.enter="login"
           v-model.trim="form.password"
           type="password"
           color="primary"
@@ -70,6 +78,15 @@ async function login() {
       </UFormGroup>
       <div class="mt-2 flex justify-end">
         <UButton @click="login">Login</UButton>
+      </div>
+
+      <div
+        class="mt-4 border-2 border-dashed border-gray-300 p-2 text-gray-500 text-sm"
+      >
+        Accounts:
+
+        <div>Emails: admin|editor|viewer@sample.com</div>
+        <div>Password: password</div>
       </div>
     </div>
   </div>

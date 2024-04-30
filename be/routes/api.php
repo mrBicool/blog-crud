@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->middleware(('role:admin|editor'));
 
     Route::delete('/articles/{id}', [App\Http\Controllers\Api\ArticleController::class, 'destroy'])
-        ->middleware(('role:admin|editor'));
+        ->middleware(('role:admin'));
 });
 
 

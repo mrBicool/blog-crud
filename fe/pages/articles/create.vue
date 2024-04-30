@@ -12,6 +12,10 @@ const form = ref({
 
 const submit = async () => {
   try {
+    if (!confirm("Are you sure you want to submit?")) {
+      return;
+    }
+
     const { data: response, error } = await useApiFetch(`/articles`, {
       method: "POST",
       body: form.value,
@@ -34,35 +38,23 @@ const submit = async () => {
 </script>
 
 <template>
-  <div class="">
-    <div class="mt-4">
-      <UFormGroup label="Title" required>
-        <UInput
-          v-model.trim="form.title"
-          color="primary"
-          variant="outline"
-          placeholder="Search..."
-        />
-      </UFormGroup>
-      <UFormGroup label="Content" class="mt-2" required>
-        <UTextarea
-          v-model.trim="form.content"
-          color="primary"
-          variant="outline"
-          placeholder="content..."
-        />
-      </UFormGroup>
-      <div>
-        <UButton
-          @click="submit"
-          color="primary"
-          class="mt-4"
-          size="xs"
-          variant="solid"
-        >
-          Submit
-        </UButton>
-      </div>
+  <div class="mt-4">
+    <UFormGroup label="Title" required>
+      <UInput v-model.trim="form.title" color="primary" variant="outline" />
+    </UFormGroup>
+    <UFormGroup label="Content" class="mt-2" required>
+      <TiptapEditor v-model.trim="form.content" />
+    </UFormGroup>
+    <div>
+      <UButton
+        @click="submit"
+        color="primary"
+        class="mt-4"
+        size="xs"
+        variant="solid"
+      >
+        Submit
+      </UButton>
     </div>
   </div>
 </template>

@@ -62,7 +62,10 @@ onMounted(async () => {
 <template>
   <div class="">
     <div class="">
-      <div class="flex justify-end">
+      <div
+        v-if="['admin', 'editor'].includes(useAuth.user_role)"
+        class="flex justify-end"
+      >
         <UButton to="/articles/create" size="xs">Create Post</UButton>
       </div>
 
@@ -79,7 +82,12 @@ onMounted(async () => {
                 <p
                   class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50 tracking-wider"
                 >
-                  {{ item.title }}
+                  <nuxt-link
+                    :to="`/articles/${item.id}`"
+                    class="hover:underline"
+                  >
+                    {{ item.title }}
+                  </nuxt-link>
                   <span
                     v-if="['admin', 'editor'].includes(useAuth.user_role)"
                     class="font-normal text-gray-500 text-xs ml-2"
@@ -90,6 +98,7 @@ onMounted(async () => {
                       >
                     </NuxtLink>
                     <span
+                      v-if="['admin'].includes(useAuth.user_role)"
                       @click="remove(item)"
                       class="hover:text-red-600 cursor-pointer ml-1"
                     >
@@ -105,10 +114,9 @@ onMounted(async () => {
               </div>
 
               <p
-                class="mt-1 line-clamp-2 text-sm leading-6 text-gray-600 dark:text-gray-400 font-light"
-              >
-                {{ item.content }}
-              </p>
+                class="mt-1 line-clamp-6 text-sm leading-6 text-gray-600 dark:text-gray-400 font-light"
+                v-html="item.content"
+              ></p>
             </div>
           </li>
         </ul>

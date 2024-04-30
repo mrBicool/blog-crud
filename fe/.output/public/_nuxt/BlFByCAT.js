@@ -1,0 +1,1 @@
+import{U as t,n as e}from"./Bhnlaw80.js";import{a as o}from"./DgbBGBFi.js";const s=t((u,a)=>{if(console.log("running auth middleware"),!o().isAuthenticated())return e("/login")});export{s as default};

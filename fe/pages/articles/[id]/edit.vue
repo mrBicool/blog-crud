@@ -81,20 +81,10 @@ async function submit() {
   <div class="">
     <div class="mt-4">
       <UFormGroup label="Title" required>
-        <UInput
-          v-model.trim="form.title"
-          color="primary"
-          variant="outline"
-          placeholder="Search..."
-        />
+        <UInput v-model.trim="form.title" color="primary" variant="outline" />
       </UFormGroup>
       <UFormGroup label="Content" class="mt-2" required>
-        <UTextarea
-          v-model.trim="form.content"
-          color="primary"
-          variant="outline"
-          placeholder="content..."
-        />
+        <TiptapEditor v-model.trim="form.content" />
       </UFormGroup>
       <div>
         <UButton
