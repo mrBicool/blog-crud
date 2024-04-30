@@ -60,14 +60,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <div class="container mx-auto py-4">
+  <div class="">
+    <div class="">
       <div class="flex justify-end">
         <UButton to="/articles/create" size="xs">Create Post</UButton>
       </div>
 
       <!-- ARTICLES -->
-      <div class="mt-4">
+      <div class="">
         <ul v-if="articles" role="list" class="divide-y divide-gray-100">
           <li
             v-for="item in articles.data"
@@ -76,33 +76,37 @@ onMounted(async () => {
           >
             <div class="flex-auto">
               <div class="flex items-baseline justify-between gap-x-4">
-                <p class="text-sm font-semibold leading-6 text-gray-900">
+                <p
+                  class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50 tracking-wider"
+                >
                   {{ item.title }}
                   <span
                     v-if="['admin', 'editor'].includes(useAuth.user_role)"
-                    class="font-normal text-gray-500 text-xs"
+                    class="font-normal text-gray-500 text-xs ml-2"
                     >|
                     <NuxtLink :to="`/articles/${item.id}/edit`">
-                      <span class="hover:text-blue-600 cursor-pointer"
+                      <span class="hover:text-blue-600 cursor-pointer ml-1"
                         >Edit</span
                       >
                     </NuxtLink>
                     <span
                       @click="remove(item)"
-                      class="hover:text-red-600 cursor-pointer"
+                      class="hover:text-red-600 cursor-pointer ml-1"
                     >
                       Delete</span
                     >
                   </span>
                 </p>
-                <p class="flex-none text-xs text-gray-600">
+                <p class="flex-none text-xs text-gray-600 dark:text-gray-400">
                   <time datetime="2023-03-04T15:54Z">
                     {{ item.formatted_created_at }}
                   </time>
                 </p>
               </div>
 
-              <p class="mt-1 line-clamp-2 text-sm leading-6 text-gray-600">
+              <p
+                class="mt-1 line-clamp-2 text-sm leading-6 text-gray-600 dark:text-gray-400 font-light"
+              >
                 {{ item.content }}
               </p>
             </div>

@@ -22,6 +22,7 @@ async function login() {
     if (error.value) {
       console.log("LOGIN", error.value.data.message);
       toast.add({
+        color: "red",
         title: error.value.data.message,
       });
       return;
@@ -50,17 +51,15 @@ async function login() {
 <template>
   <div class="h-screen flex items-center justify-center">
     <div class="max-w-lg">
-      <div>
-        <label for="">Email</label>
+      <UFormGroup label="Email" required>
         <UInput
           v-model.trim="form.email"
           color="primary"
           variant="outline"
           placeholder="Search..."
         />
-      </div>
-      <div>
-        <label for="">Password</label>
+      </UFormGroup>
+      <UFormGroup class="mt-2" label="Password" required>
         <UInput
           v-model.trim="form.password"
           type="password"
@@ -68,8 +67,8 @@ async function login() {
           variant="outline"
           placeholder="Search..."
         />
-      </div>
-      <div>
+      </UFormGroup>
+      <div class="mt-2 flex justify-end">
         <UButton @click="login">Login</UButton>
       </div>
     </div>

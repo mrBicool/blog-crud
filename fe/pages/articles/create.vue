@@ -1,4 +1,10 @@
 <script setup>
+definePageMeta({
+  middleware: "auth",
+});
+
+const toast = useToast();
+
 const form = ref({
   title: "",
   content: "",
@@ -11,6 +17,11 @@ const submit = async () => {
       body: form.value,
     });
     if (error.value) {
+      console.log("CREATE", error.value.data.message);
+      toast.add({
+        color: "red",
+        title: error.value.data.message,
+      });
       return;
     }
     console.log("RESPONSE", response.value);
@@ -23,9 +34,9 @@ const submit = async () => {
 </script>
 
 <template>
-  <div class="p-2">
+  <div class="">
     <div class="mt-4">
-      <UFormGroup label="Title">
+      <UFormGroup label="Title" required>
         <UInput
           v-model.trim="form.title"
           color="primary"
@@ -33,7 +44,7 @@ const submit = async () => {
           placeholder="Search..."
         />
       </UFormGroup>
-      <UFormGroup label="Content" class="mt-2">
+      <UFormGroup label="Content" class="mt-2" required>
         <UTextarea
           v-model.trim="form.content"
           color="primary"

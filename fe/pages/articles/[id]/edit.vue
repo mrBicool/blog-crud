@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: "auth",
+});
+
 const route = useRoute();
 const toast = useToast();
 
@@ -74,9 +78,9 @@ async function submit() {
 </script>
 
 <template>
-  <div class="p-2">
+  <div class="">
     <div class="mt-4">
-      <UFormGroup label="Title">
+      <UFormGroup label="Title" required>
         <UInput
           v-model.trim="form.title"
           color="primary"
@@ -84,7 +88,7 @@ async function submit() {
           placeholder="Search..."
         />
       </UFormGroup>
-      <UFormGroup label="Content" class="mt-2">
+      <UFormGroup label="Content" class="mt-2" required>
         <UTextarea
           v-model.trim="form.content"
           color="primary"

@@ -1,7 +1,10 @@
 <template>
   <div class="">
     <AppHeader />
-    <slot />
+
+    <div class="container mx-auto max-w-3xl p-4">
+      <slot />
+    </div>
     <!-- <AppFooter /> -->
     <UNotifications />
   </div>
