@@ -7,9 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
-    public function post(Request $request)
+    public function login(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -27,8 +27,19 @@ class LoginController extends Controller
         return response()->json([
             'message' => 'Successfully login.',
             'data' => [
+                'user' => $user,
                 'token' => $user->createToken('token')->plainTextToken,
+                'role' => $user->roles->first()->name,
             ]
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Successfully logout.',
         ]);
     }
 }

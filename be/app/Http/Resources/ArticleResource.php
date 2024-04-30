@@ -14,6 +14,12 @@ class ArticleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        // return parent::toArray($request);
+        return array_merge(
+            parent::toArray($request),
+            [
+                'formatted_created_at' => $this->created_at->diffForHumans(),
+            ]
+        );
     }
 }

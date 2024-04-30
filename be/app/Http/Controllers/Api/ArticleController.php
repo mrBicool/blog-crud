@@ -15,7 +15,8 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $items = Article::filter($request->all())
+        $items = Article::latest()
+            ->filter($request->all())
             ->paginate($request->limit);
 
         return ArticleResource::collection($items);
